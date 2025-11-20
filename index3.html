@@ -291,7 +291,7 @@
                     </div>
                     <div class="timeline-item">
                         <strong data-key="tl-4-head" style="color:var(--text-main)">Integracja</strong><br>
-                        <span data-key="tl-4-desc" style="font-size:0.9rem">Przedsiębiorca (MIND). Twórca Life OS. Łączenie logiki z duchem.</span>
+                        <span data-key="tl-4-desc" style="font-size:0.9rem">Przedsiębiorca (MIND). Twórca Life OS. Łączenie logiki biznesu z duchem.</span>
                     </div>
                 </div>
             </div>
@@ -434,7 +434,6 @@
                 "about-bio-2": "As a developer and leader at MSD, I realized that the best code won't run on an infected mind.",
                 "about-bio-3": "Today, as co-founder of MIND and a mentor, I implement Life OS – systems that turn knowledge into action.",
                 
-                // POPRAWKA EN (subtitle bez dublowania)
                 "vision-title": "The Awakened World Is Already Here.",
                 "vision-subtitle": "If you have forgotten this, I built this system so you can return.",
                 "cta-7days": "Start 7 Days of Presence",
@@ -463,88 +462,100 @@
             }
         };
 
-        // PEŁNE TREŚCI ARTYKUŁÓW (Odtworzone i rozbudowane)
+        // --- DATA: MIXED SNIPPETS ---
+        // Titles & Full Content -> From Snippet 1
+        // Previews (descPL/EN) -> From Snippet 2
         const articles = [
-            { 
-                id: 1, 
-                tags: ["Consciousness"], 
-                titlePL: "Uwaga jako kierownica", 
-                titleEN: "Attention as the Steering Wheel", 
-                descPL: "Twoja rzeczywistość jest tam, gdzie Twoja uwaga. Jak odzyskać kontrolę?", 
-                descEN: "Your reality is where your attention is. How to regain control?", 
+            {
+                id: 1,
+                tags: ["Consciousness", "Physics"],
+                titlePL: "Uwaga jako kierownica rzeczywistości",
+                titleEN: "Attention as the Steering Wheel of Reality",
+                // Short Preview (Card)
+                descPL: "Twoja uwaga jest najcenniejszą walutą. To, na czym się skupiasz, rośnie. W fizyce kwantowej obserwator wpływa na wynik eksperymentu. W życiu jest tak samo. Jeśli nie zarządzasz swoją uwagą, zarządza nią algorytm.",
+                descEN: "Your attention is your most valuable currency. What you focus on grows. In quantum physics, the observer affects the experiment. Life is the same. If you don't manage your attention, an algorithm will.",
+                // Full Content (Read View)
                 contentPL: `
-                    <h3>Czym jest uwaga?</h3>
-                    <p>Większość ludzi traktuje uwagę jako bierny proces rejestrowania świata – jak kamerę, która po prostu nagrywa to, co się dzieje. W fizyce kwantowej i w głębokim życiu duchowym wiemy jednak, że obserwator wpływa na wynik eksperymentu.</p>
-                    <p>To, na co kierujesz uwagę, rośnie. Jeśli karmisz swój umysł algorytmami social mediów, oddajesz kierownicę swojego życia maszynom zaprojektowanym, by Cię uzależnić. Twoja uwaga to najcenniejsza waluta XXI wieku.</p>
-                    <h3>Jak odzyskać kontrolę?</h3>
-                    <p>Zacznij od prostego ćwiczenia: przez jedną minutę dziennie nie rób nic. Obserwuj, gdzie ucieka Twój umysł. Nie oceniaj tego. Zauważenie automatyzmu to pierwszy krok do jego zatrzymania. To jest moment, w którym chwytasz kierownicę.</p>
-                `, 
+                    <p>W fizyce kwantowej znany jest "efekt obserwatora". Sam fakt obserwacji wpływa na zachowanie cząstek. To nie jest tylko ezoteryczna metafora – to fundamentalne prawo rzeczywistości. Twoja uwaga jest wiązką energii, która "zagęszcza" prawdopodobieństwo w rzeczywistość.</p>
+                    <p>Większość ludzi oddała kierownicę swojej uwagi algorytmom. Scrollują, reagują na powiadomienia, żyją w trybie reaktywnym. Jeśli nie sterujesz swoją uwagą, steruje nią ktoś inny. A ten "ktoś" (czy to korporacja, czy Twoje własne nieuświadomione lęki) rzadko ma na celu Twoje dobro.</p>
+                    <p>Odzyskanie władzy nad uwagą to pierwszy krok w Life OS. To nie jest kwestia "siły woli", to kwestia higieny systemu. Musisz nauczyć się przekierowywać zasoby obliczeniowe swojego mózgu tam, gdzie Ty wybierasz, a nie tam, gdzie jest najgłośniej.</p>
+                    <p><b>Praktyka:</b> Przez następną godzinę obserwuj nie świat, ale to, gdzie wędruje Twoja uwaga. Czy jesteś kierowcą, czy pasażerem?</p>
+                `,
                 contentEN: `
-                    <h3>What is attention?</h3>
-                    <p>Most people treat attention as a passive process of recording the world—like a camera just filming what happens. In quantum physics and deep spiritual life, however, we know the observer affects the outcome of the experiment.</p>
-                    <p>What you focus on grows. If you feed your mind with social media algorithms, you are handing the steering wheel of your life to machines designed to addict you. Your attention is the most valuable currency of the 21st century.</p>
-                    <h3>How to regain control?</h3>
-                    <p>Start with a simple exercise: for one minute a day, do nothing. Observe where your mind wanders. Do not judge it. Noticing the automatism is the first step to stopping it. This is the moment you grab the steering wheel.</p>
-                ` 
+                    <p>In quantum physics, the "observer effect" is well known. The very act of observation affects the behavior of particles. This isn't just an esoteric metaphor—it is a fundamental law of reality. Your attention is an energy beam that "collapses" probability into reality.</p>
+                    <p>Most people have handed the steering wheel of their attention over to algorithms. They scroll, react to notifications, live in reactive mode. If you don't steer your attention, someone else will. And that "someone" (be it a corporation or your own unconscious fears) rarely has your best interests at heart.</p>
+                    <p>Reclaiming power over attention is the first step in Life OS. It's not a matter of "willpower"; it's a matter of system hygiene. You must learn to redirect your brain's computational resources to where You choose, not where it's loudest.</p>
+                    <p><b>Practice:</b> For the next hour, observe not the world, but where your attention wanders. Are you the driver or the passenger?</p>
+                `
             },
-            { 
-                id: 2, 
-                tags: ["Logic & Spirit"], 
-                titlePL: "Bodziec i Reakcja", 
-                titleEN: "Stimulus and Response", 
-                descPL: "Między bodźcem a reakcją jest przestrzeń. Tam leży Twoja wolność.", 
-                descEN: "Between stimulus and response there is a space. That is your freedom.", 
+            {
+                id: 2,
+                tags: ["Logotherapy", "Stoicism"],
+                titlePL: "Przestrzeń między bodźcem a reakcją",
+                titleEN: "The Space Between Stimulus and Response",
+                // Short Preview
+                descPL: "Viktor Frankl mówił o ostatniej wolności człowieka: wyborze postawy. Między tym co się dzieje (bodziec), a tym co robisz (reakcja), jest ułamek sekundy. Tam mieszka Twoja wolność. Tam buduje się charakter.",
+                descEN: "Viktor Frankl spoke of man's last freedom: the choice of attitude. Between what happens (stimulus) and what you do (response), there is a split second. That is where your freedom lives. That is where character is built.",
+                // Full Content
                 contentPL: `
-                    <h3>Logika wolności</h3>
-                    <p>Viktor Frankl, psychiatra i więzień obozów koncentracyjnych, powiedział: "Pomiędzy bodźcem a reakcją jest przestrzeń. W tej przestrzeni leży nasza wolność i moc wyboru naszej odpowiedzi".</p>
-                    <p>W świecie zwierząt i algorytmów: Bodziec = Reakcja. Ktoś krzyczy -> boisz się. Dzwoni telefon -> odbierasz. Jako ludzie mamy korę nową, która pozwala nam wstawić "pauzę" w ten kod.</p>
-                    <h3>Praktyka Pauzy</h3>
-                    <p>Budowanie tej przestrzeni to trening mentalny. Kiedy czujesz nagły impuls (gniew, chęć ucieczki, chęć sprawdzenia telefonu) – weź jeden głęboki oddech. To wystarczy, by przełączyć się z trybu "przetrwanie" na tryb "tworzenie". W tej jednej sekundzie decydujesz, kim jesteś.</p>
-                `, 
+                    <p>Viktor Frankl, psychiatra, który przeżył Auschwitz, sformułował jedną z najważniejszych zasad inżynierii ludzkiego ducha: "Pomiędzy bodźcem a reakcją jest przestrzeń. W tej przestrzeni leży nasza wolność i moc wyboru naszej odpowiedzi."</p>
+                    <p>Współczesny świat robi wszystko, by tę przestrzeń zlikwidować. Powiadomienie (bodziec) -> Kliknięcie (reakcja). Stres (bodziec) -> Używka (reakcja). Krytyka (bodziec) -> Obrona (reakcja). To jest życie na autopilocie. To jest życie robota.</p>
+                    <p>Life OS polega na poszerzaniu tej przestrzeni. Medytacja, zimne prysznice, dziennik – to nie są cele same w sobie. To treningi, które wydłużają czas między impulsem a działaniem. W tym ułamku sekundy możesz włączyć świadomość i zapytać: "Czy ta reakcja mi służy?".</p>
+                    <p>Mędrzec to ktoś, kto w tej przestrzeni potrafi wstawić świadomy wybór, zamiast odtwarzać stary skrypt.</p>
+                `,
                 contentEN: `
-                    <h3>The Logic of Freedom</h3>
-                    <p>Viktor Frankl, psychiatrist and concentration camp survivor, said: "Between stimulus and response there is a space. In that space is our power to choose our response. In our response lies our growth and our freedom."</p>
-                    <p>In the animal and algorithmic world: Stimulus = Response. Someone shouts -> you fear. Phone rings -> you answer. As humans, we have the neocortex, which allows us to insert a "pause" into this code.</p>
-                    <h3>The Practice of Pause</h3>
-                    <p>Building this space is mental training. When you feel a sudden impulse (anger, desire to escape, urge to check your phone) – take one deep breath. That is enough to switch from "survival" mode to "creation" mode. In that one second, you decide who you are.</p>
-                ` 
+                    <p>Viktor Frankl, a psychiatrist who survived Auschwitz, formulated one of the most important principles of human spirit engineering: "Between stimulus and response there is a space. In that space is our power to choose our response."</p>
+                    <p>The modern world does everything to eliminate this space. Notification (stimulus) -> Click (response). Stress (stimulus) -> Substance (response). Criticism (stimulus) -> Defense (response). This is life on autopilot. This is the life of a robot.</p>
+                    <p>Life OS is about widening this space. Meditation, cold showers, journaling—these are not ends in themselves. They are training sessions that lengthen the time between impulse and action. In that split second, you can engage consciousness and ask: "Does this response serve me?".</p>
+                    <p>A wise person is someone who can insert a conscious choice into that space instead of replaying an old script.</p>
+                `
             },
-            { 
-                id: 3, 
-                tags: ["System"], 
-                titlePL: "Life OS: Wstęp", 
-                titleEN: "Life OS: Introduction", 
-                descPL: "Dlaczego potrzebujesz systemu operacyjnego dla swojego życia?", 
-                descEN: "Why do you need an operating system for your life?", 
+            {
+                id: 3,
+                tags: ["Systems", "Entropy"],
+                titlePL: "Entropia i Life OS",
+                titleEN: "Entropy and Life OS",
+                // Short Preview
+                descPL: "Duchowość bez systemu to tylko krótki haj. Potrzebujesz infrastruktury: nawyków, kalendarza, zasad podejmowania decyzji. Life OS to system operacyjny, który pozwala Twojej wizji przetrwać zderzenie z chaosem codzienności.",
+                descEN: "Spirituality without a system is just a temporary high. You need infrastructure: habits, calendars, decision-making rules. Life OS is the operating system that allows your vision to survive the collision with daily chaos.",
+                // Full Content
                 contentPL: `
-                    <h3>System czy Chaos?</h3>
-                    <p>Każda firma ma system operacyjny. Każdy komputer ma system. A Twoje życie? Często działa na przestarzałym oprogramowaniu wgranym w dzieciństwie przez rodziców, szkołę i otoczenie.</p>
-                    <p>Life OS to koncepcja traktowania swojego życia jak projektu inżynieryjnego. Nie chodzi o to, by stać się robotem, ale by zautomatyzować to, co powtarzalne (nawyki, finanse, zdrowie), aby uwolnić zasoby mentalne na to, co najważniejsze: twórczość, miłość i bycie obecnym.</p>
-                    <h3>Architektura</h3>
-                    <p>Twój system składa się z: 1. Wizji (dokąd zmierzam?), 2. Tożsamości (kim muszę być?), 3. Procesów (co robię codziennie?). Jeśli masz wizję, ale złe procesy – przegrasz. Jeśli masz świetne procesy, ale brak wizji – dojdziesz donikąd, tylko bardzo szybko.</p>
-                `, 
+                    <p>Drugie prawo termodynamiki mówi, że entropia (nieuporządkowanie) w układzie zamkniętym zawsze rośnie. Jeśli zostawisz ogród samemu sobie, nie powstanie tam piękna rabata – powstaną chwasty. Jeśli zostawisz swoje życie "naturalnemu biegowi", nie osiągniesz pełni – osiągniesz chaos.</p>
+                    <p>Wiele osób próbuje walczyć z entropią za pomocą "motywacji". To jak próba ogrzania domu w zimie poprzez chuchanie w dłonie. Działa przez chwilę. Life OS to budowa centralnego ogrzewania.</p>
+                    <p>Potrzebujesz systemu. Potrzebujesz infrastruktury. Kalendarz, rytuały poranne, zasady podejmowania decyzji, otoczenie, które wspiera Twoje wartości. To są ramy, które trzymają strukturę Twojej rzeczywistości, gdy Ty masz gorszy dzień.</p>
+                    <p>Budowanie Life OS to inżynieria odwrotna do chaosu. To wprowadzanie ładu tam, gdzie natura chce bałaganu.</p>
+                `,
                 contentEN: `
-                    <h3>System or Chaos?</h3>
-                    <p>Every company has an operating system. Every computer has a system. What about your life? It often runs on outdated software installed in childhood by parents, school, and society.</p>
-                    <p>Life OS is the concept of treating your life like an engineering project. It's not about becoming a robot, but about automating the repetitive (habits, finances, health) to free up mental resources for what matters most: creativity, love, and presence.</p>
-                    <h3>Architecture</h3>
-                    <p>Your system consists of: 1. Vision (where am I going?), 2. Identity (who do I need to be?), 3. Processes (what do I do daily?). If you have a vision but bad processes – you will lose. If you have great processes but no vision – you will get nowhere, just very fast.</p>
-                ` 
+                    <p>The second law of thermodynamics states that entropy (disorder) in a closed system always increases. If you leave a garden to itself, a beautiful flowerbed won't emerge—weeds will. If you leave your life to its "natural course," you won't achieve wholeness—you will achieve chaos.</p>
+                    <p>Many people try to fight entropy with "motivation." It's like trying to heat a house in winter by blowing on your hands. It works for a moment. Life OS is building central heating.</p>
+                    <p>You need a system. You need infrastructure. Calendars, morning rituals, decision-making protocols, an environment that supports your values. These are the frames that hold the structure of your reality when you are having a bad day.</p>
+                    <p>Building a Life OS is reverse engineering chaos. It is introducing order where nature wants mess.</p>
+                `
             }
         ];
 
         let currentLang = 'pl';
+        let activeArticleId = null; // Tracks if we are reading an article
+
         const navMap = {
             'landing-a': 'nav-home', 'landing-b': 'nav-vision', 'about': 'nav-about',
             'writings': 'nav-writings', 'services': 'nav-services', 'contact': 'nav-contact'
         };
 
         function updateTexts() {
+            // 1. Update standard texts
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
             });
+            
+            // 2. Refresh Article Grid (Previews)
             renderArticlesList();
+            
+            // 3. IF an article is currently open, refresh its content "live"
+            if (activeArticleId !== null) {
+                renderOpenArticleContent(activeArticleId);
+            }
         }
 
         function toggleLanguage() {
@@ -568,19 +579,32 @@
         }
 
         function openArticle(id) {
+            activeArticleId = id; // Set state
+            renderOpenArticleContent(id);
+            
+            // Switch Views
+            document.querySelectorAll('main > section').forEach(s => s.style.display='none');
+            const detail = document.getElementById('article-detail');
+            detail.style.display='block';
+            detail.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // Helper to render content logic
+        function renderOpenArticleContent(id) {
             const art = articles.find(a => a.id === id);
             if(!art) return;
+            
             const contentArea = document.getElementById('article-content-area');
             const t = currentLang === 'pl' ? art.titlePL : art.titleEN;
             const c = currentLang === 'pl' ? art.contentPL : art.contentEN;
             contentArea.innerHTML = `<h1 style="margin-bottom:2rem;">${t}</h1><div class="article-content">${c}</div>`;
-            document.querySelectorAll('main > section').forEach(s => s.style.display='none');
-            document.getElementById('article-detail').style.display='block';
-            document.getElementById('article-detail').classList.add('active');
-            window.scrollTo(0,0);
         }
         
-        function closeArticle() { router('writings'); }
+        function closeArticle() { 
+            activeArticleId = null; // Reset state
+            router('writings'); 
+        }
 
         function router(route) {
             document.getElementById('article-detail').style.display = 'none';
