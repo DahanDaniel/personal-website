@@ -1,0 +1,175 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* =========================================
+   Grid Container
+   ========================================= */
+.grid-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2vmin;
+    transform-origin: center center; /* Zoom from center */
+    transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 50;
+    /* We need to ensure the hero image ends up covering the screen */
+}
+
+.grid-container.zoomed {
+    transform: scale(20); /* Massive scale to make hero fill screen */
+}
+
+/* =========================================
+   Rows & Marquee
+   ========================================= */
+.row {
+    display: flex;
+    width: 200%; /* Make space for animation */
+    gap: 2vmin;
+    /* Marquee animation classes applied below */
+}
+
+.row-inner {
+    display: flex;
+    gap: 2vmin;
+    width: 50%; /* Half the total row width */
+}
+
+.row img {
+    width: 30vmin;
+    height: 20vmin;
+    object-fit: cover;
+    display: block;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+    filter: grayscale(100%);
+}
+
+/* Highlight the hero row/image */
+.center-row img {
+    opacity: 1;
+    filter: none;
+    height: 30vmin; /* Center row slightly taller? */
+}
+
+/* Hero Wrapper - The Target */
+.hero-wrapper, .hero-wrapper-placeholder {
+    position: relative;
+    /* Make the hero distinct */
+    z-index: 2; 
+}
+
+#hero-image {
+    /* Ensure this specific image is high quality and ready to "be" the background */
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+/* Animations */
+@keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+.marquee-left {
+    animation: marquee-left 30s linear infinite; /* Slow generic movement */
+}
+
+.marquee-right {
+    animation: marquee-right 30s linear infinite;
+}
+
+/* Stop animation when zooming */
+.grid-container.stopped .row {
+    animation-play-state: paused;
+}
+
+/* =========================================
+   UI Layer
+   ========================================= */
+#ui-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 1s ease 1.5s; /* Delay until after zoom */
+}
+
+#ui-layer.visible {
+    opacity: 1;
+}
+
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    pointer-events: auto;
+}
+
+.menu-trigger {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* =========================================
+   Slider (CodePen Style)
+   ========================================= */
+#image-track {
+    display: flex;
+    gap: 4vmin;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(0%, -50%); 
+    user-select: none;
+    transition: opacity 1s ease;
+    z-index: 60; /* Above the zoomed grid */
+}
+
+#image-track.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+}
