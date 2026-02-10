@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Dahan | Systems for Life</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="#" class="nav-logo" data-route="home">Daniel Dahan</a>
+        <div class="nav-links">
+            <a href="#" data-route="home">Work</a>
+            <a href="#" data-route="about">About</a>
+        </div>
+    </nav>
+
+    <!-- HORIZONTAL SLIDER (HOME) -->
+    <div class="slider-container" id="slider">
+        <div class="slider-track">
+            
+            <!-- SLIDE 1: VISION -->
+            <div class="slide" data-project="vision">
+                <div class="slide-bg" style="background-color: #1a1a1a;"></div> <!-- Placeholder BG -->
+                <div class="slide-content">
+                    <h2 class="slide-title">Vision</h2>
+                    <span class="slide-subtitle">Awakened World</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: SERVICES -->
+            <div class="slide" data-project="services">
+                <div class="slide-bg" style="background-color: #222;"></div> <!-- Placeholder BG -->
+                <div class="slide-content">
+                    <h2 class="slide-title">Services</h2>
+                    <span class="slide-subtitle">Mentoring & Systems</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: WRITINGS -->
+            <div class="slide" data-project="writings">
+                <div class="slide-bg" style="background-color: #2a2a2a;"></div> <!-- Placeholder BG -->
+                <div class="slide-content">
+                    <h2 class="slide-title">Writings</h2>
+                    <span class="slide-subtitle">Essays & Ideas</span>
+                </div>
+            </div>
+
+        const projects = {
+            vision: {
+                title: "Vision",
+                subtitle: "Awakened World",
+                media: ['./assets/daniel-profile-2.jpeg'], // Placeholder
+                content: `
+                    <h1>Awakened World Already Is.</h1>
+                    <p class="lead">Oświecony świat już tu jest. Jeśli o tym zapomniałeś, stworzyłem ten system, abyś mógł tu wrócić.</p>
+                    
+                    <div class="process-grid">
+                        <div class="process-item">
+                            <span class="num">01</span>
+                            <h3>Impuls</h3>
+                            <p>Moment zatrzymania. Iskra świadomości.</p>
+                        </div>
+                        <div class="process-item">
+                            <span class="num">02</span>
+                            <h3>Ramy Mentalne</h3>
+                            <p>Zrozumienie mechanizmów umysłu. Zrobienie miejsca na czucie.</p>
+                        </div>
+                        <div class="process-item">
+                            <span class="num">03</span>
+                            <h3>Infrastruktura</h3>
+                            <p>Budowa Life OS. Wsparcie rozwoju.</p>
+                        </div>
+                        <div class="process-item">
+                            <span class="num">04</span>
+                            <h3>Transformacja</h3>
+                            <p>Praktyka codzienna. Integracja świadomości.</p>
+                        </div>
+                    </div>
+                `
+            },
+            services: {
+                title: "Współpraca",
+                subtitle: "Services",
+                media: [], // No specific image yet
+                content: `
+                    <h1>Mentoring & Systems</h1>
+                    <p class="lead">Pomagam ludziom widzieć jasno, odzyskiwać sprawczość i budować systemy życia (Life OS).</p>
+                    
+                    <div class="service-item">
+                        <h3>Mentoring 1:1</h3>
+                        <p>Indywidualny proces przebudowy Twojego Systemu Operacyjnego. Praca nad strukturą życia, emocjami i realizacją celów z poziomu pełni.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Systemy (MIND)</h3>
+                        <p>Projektowanie procesów biznesowych, automatyzacji i systemów coldmailingowych (Business OS). Rozwiązania B2B.</p>
+                    </div>
+
+                    <div class="service-item">
+                        <h3>Warsztaty</h3>
+                        <p>NVC, uwaga i technologia świadomości. Praca z grupami nad komunikacją i odwidzeniem schematów.</p>
+                    </div>
+                `
+            },
+            writings: {
+                title: "Teksty & Idee",
+                subtitle: "Writings",
+                media: [], 
+                content: `
+                    <h1>Eseje & Narzędzia</h1>
+                    <p class="lead">Zbiór myśli, narzędzi mentalnych i perspektyw.</p>
+                    
+                    <ul class="article-list">
+                        <li>
+                            <span class="meta">Consciousness</span>
+                            <h3>Uwaga jako kierownica rzeczywistości</h3>
+                            <p>Twoja uwaga jest najcenniejszą walutą. To, na czym się skupiasz, rośnie.</p>
+                        </li>
+                        <li>
+                            <span class="meta">Stoicism</span>
+                            <h3>Przestrzeń między bodźcem a reakcją</h3>
+                            <p>Między tym co się dzieje (bodziec), a tym co robisz (reakcja), jest ułamek sekundy. Tam mieszka Twoja wolność.</p>
+                        </li>
+                        <li>
+                            <span class="meta">Systems</span>
+                            <h3>Entropia i Life OS</h3>
+                            <p>Duchowość bez systemu to tylko krótki haj. Potrzebujesz infrastruktury.</p>
+                        </li>
+                    </ul>
+                `
+            },
+            about: {
+                title: "Daniel Dahan",
+                subtitle: "About",
+                media: ['./assets/daniel.jpg'],
+                content: `
+                    <h1>Fizyk. Artysta.<br>Programista.</h1>
+                    <p class="lead">Nie wierzę w podział na umysł ścisły i humanistyczny. To sztuczna granica.</p>
+                    
+                    <p>Moje zaplecze to <strong>Fizyka Teoretyczna</strong>. Nauczyła mnie ona patrzeć na rzeczywistość nie przez pryzmat opinii, ale fundamentalnych zasad.</p>
+                    <p>Moja praktyka to <strong>Programowanie i Biznes</strong>. W świecie kodu i w świecie kapitału nie ma miejsca na teoretyzowanie – liczy się tylko to, czy system działa.</p>
+                    <p>Buduję Life OS, bo widzę ludzi, którzy mają świetny "software" (wiedzę), ale ich "hardware" (ciało i nawyki) nie wyrabia. Pomagam to zintegrować.</p>
+                    
+                    <br>
+                    <a href="mailto:contact@danieldahan.com" class="btn-text">contact@danieldahan.com</a>
+                `
+            }
+        };
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
