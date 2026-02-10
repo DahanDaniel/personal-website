@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Dahan | Art of Life & Life OS</title>
+    
+    <!-- Typography: Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FAFAFA;
+            --text-main: #1F1F1F;
+            --text-muted: #666666;
+            --accent: #C5B8A5; /* Champagne/Muted Gold */
+            --border: #E5E5E5;
+            --font-main: 'Inter', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+            --spacing-container: max(20px, 5vw);
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        button { font-family: inherit; border: none; background: none; cursor: pointer; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.2; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; }
+        h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 1rem; }
+        h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 70ch; }
+        
+        .quote { font-style: italic; font-size: 1.2rem; border-left: 2px solid var(--accent); padding-left: 1.5rem; color: var(--text-main); }
+
+        /* --- LAYOUT --- */
+        .container {
+            padding: 0 var(--spacing-container);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 5rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            display: none; /* Hidden by default */
+        }
+        
+        section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        header.scrolled { border-bottom: 1px solid var(--border); }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-family: var(--font-display); font-weight: 500; font-size: 1.2rem; letter-spacing: -0.01em; }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-size: 0.95rem; color: var(--text-muted); position: relative; }
+        .nav-links a:hover, .nav-links a.current { color: var(--text-main); }
+        
+        /* Mobile Menu */
+        .menu-toggle { display: none; font-size: 1.5rem; }
+        
+        .lang-switch { 
+            margin-left: 2rem; 
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+        .lang-switch:hover { border-color: var(--text-main); }
+
+        /* --- COMPONENTS --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--text-main);
+            color: #fff;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+        .btn:hover { background: var(--accent); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--text-main); color: var(--text-main); }
+        .btn-outline:hover { background: var(--text-main); color: #fff; }
+
+        /* --- LANDING A (About Daniel) --- */
+        .hero-split { display: grid; grid-template-columns: 1fr; gap: 4rem; margin-top: 4rem; }
+        @media(min-width: 768px) { .hero-split { grid-template-columns: 1fr 1fr; align-items: center; } }
+
+        .timeline-item {
+            padding-left: 2rem;
+            border-left: 1px solid var(--border);
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px; top: 5px;
+            width: 9px; height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* --- LANDING B (Vision) --- */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .vision-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        .vision-card:hover { border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .step-num { font-family: var(--font-display); font-size: 3rem; color: var(--accent); opacity: 0.4; margin-bottom: 1rem; display: block; }
+
+        /* --- WRITINGS --- */
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 3rem; }
+        .article-card { cursor: pointer; }
+        .article-meta { font-size: 0.85rem; color: var(--accent); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .article-title { font-size: 1.4rem; margin-bottom: 1rem; font-family: var(--font-display); }
+        .article-card:hover .article-title { color: var(--accent); transition: color 0.3s; }
+
+        /* --- SERVICES --- */
+        .service-row {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media(min-width: 768px) { .service-row { grid-template-columns: 1fr 2fr; } }
+
+        /* --- FOOTER --- */
+        footer { padding: 4rem 0; border-top: 1px solid var(--border); margin-top: 4rem; text-align: center; font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- RESPONSIVE NAV --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed; top: 0; right: 0; height: 100vh; width: 70%;
+                background: #fff; flex-direction: column; padding: 6rem 2rem;
+                transform: translateX(100%); transition: transform 0.4s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+            }
+            .nav-links.open { transform: translateX(0); }
+            .menu-toggle { display: block; z-index: 101; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <header id="header">
+        <div class="container nav-wrapper">
+            <a href="#landing-a" class="logo" onclick="router('landing-a')">DANIEL DAHAN</a>
+            
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#landing-a" onclick="router('landing-a')" data-key="nav-home">Home</a>
+                <a href="#landing-b" onclick="router('landing-b')" data-key="nav-vision">Vision</a>
+                <a href="#about" onclick="router('about')" data-key="nav-about">About</a>
+                <a href="#writings" onclick="router('writings')" data-key="nav-writings">Writings</a>
+                <a href="#services" onclick="router('services')" data-key="nav-services">Services</a>
+                <a href="#contact" class="btn-outline" style="padding: 0.5rem 1rem;" onclick="router('contact')" data-key="nav-contact">Contact</a>
+            </nav>
+            
+            <button class="lang-switch" onclick="toggleLanguage()">EN | PL</button>
+        </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <main id="main-content" class="container">
+
+        <!-- 1. LANDING A: PERSONAL (HOME) -->
+        <section id="landing-a">
+            <div class="hero-split">
+                <div>
+                    <p class="quote" data-key="quote">"Mędrzec to nie ktoś, kto wie kilka trudnych rzeczy, tylko ktoś, kto nie zapomniał tych najprostszych."</p>
+                    <h1 style="margin: 2rem 0;" data-key="hero-a-title">Daniel Dahan.<br>Physics. Code. Music.<br>Consciousness.</h1>
+                    <p data-key="hero-a-desc">Pomagam ludziom widzieć jasno, odzyskiwać sprawczość i budować systemy życia (Life OS) oparte na pełni, nie na braku.</p>
+                    <div style="margin-top: 2rem;">
+                        <button class="btn" onclick="router('services')" data-key="cta-help">Jak mogę Ci pomóc</button>
+                        <button class="btn-outline" style="margin-left: 1rem;" onclick="router('landing-b')" data-key="cta-vision">Zobacz wizję świata</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 data-key="timeline-title">Moja Droga</h3>
+                    <div class="timeline-item">
+                        <strong data-key="tl-1-head">Fundamenty</strong><br>
+                        <span data-key="tl-1-desc">Pływanie wyczynowe, gitara klasyczna, fortepian. Dyscyplina i harmonia.</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong data-key="tl-2-head">Nauka & Abstrakcja</strong><br>
+                        <span data-key="tl-2-desc">Fizyka Teoretyczna (UW). Zrozumienie rzeczywistości od podstaw.</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong data-key="tl-3-head">Technologia</strong><br>
+                        <span data-key="tl-3-desc">Programista Python w MSD. Mentoring młodszych developerów.</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong data-key="tl-4-head">Integracja</strong><br>
+                        <span data-key="tl-4-desc">Holistyczny Mentor, Life OS, MIND/GLG. Łączenie światów.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LANDING B: VISION -->
+        <section id="landing-b">
+            <div style="text-align: center; padding: 4rem 0;">
+                <h1 data-key="vision-title">Awakened World Already Is.</h1>
+                <p data-key="vision-subtitle">Oświecony świat już tu jest. Jeśli o tym zapomniałeś, zawsze możesz tu wrócić.</p>
+                <button class="btn" data-key="cta-7days">Start 7 Days of Presence</button>
+            </div>
+
+            <h2 data-key="process-title" style="margin-top: 2rem;">Proces Powrotu</h2>
+            <div class="vision-grid">
+                <div class="vision-card"><span class="step-num">01</span><h3 data-key="step-1">Impuls</h3><p data-key="step-1-d">Moment zatrzymania. Iskra świadomości.</p></div>
+                <div class="vision-card"><span class="step-num">02</span><h3 data-key="step-2">Ramy Mentalne</h3><p data-key="step-2-d">Zrozumienie mechanizmów ego i umysłu.</p></div>
+                <div class="vision-card"><span class="step-num">03</span><h3 data-key="step-3">Infrastruktura</h3><p data-key="step-3-d">Budowa Life OS. Środowisko wspierające.</p></div>
+                <div class="vision-card"><span class="step-num">04</span><h3 data-key="step-4">Transformacja</h3><p data-key="step-4-d">Praktyka codzienna. Integracja cienia.</p></div>
+                <div class="vision-card"><span class="step-num">05</span><h3 data-key="step-5">Działanie</h3><p data-key="step-5-d">Nowa jakość pracy i relacji. Business OS.</p></div>
+                <div class="vision-card"><span class="step-num">06</span><h3 data-key="step-6">Grawitacja</h3><p data-key="step-6-d">Tworzenie wspólnoty. Przyciąganie innych.</p></div>
+            </div>
+        </section>
+
+        <!-- 3. ABOUT (Extended) -->
+        <section id="about">
+            <h1 data-key="about-title">O mnie</h1>
+            <div class="service-row">
+                <div><img src="https://via.placeholder.com/400x500/f0f0f0/cccccc?text=Daniel+Dahan" alt="Daniel Dahan" style="width: 100%; border-radius: 4px;"></div>
+                <div>
+                    <h3 data-key="about-bio-head">Fizyk. Artysta. Programista. Mentor.</h3>
+                    <p data-key="about-bio-1">Urodziłem się w Warszawie, ale ukształtowały mnie również lata spędzone w Izraelu. Moje życie to ciągłe poszukiwanie syntezy między "twardą" nauką a "miękką" duchowością.</p>
+                    <p data-key="about-bio-2">Jako fizyk teoretyczny szukałem równań opisujących wszechświat. Jako muzyk szukałem harmonii w ciszy między dźwiękami. Jako programista Python w MSD budowałem skalowalne systemy. Dziś łączę te wszystkie doświadczenia.</p>
+                    <p data-key="about-bio-3">Moja misja to prakseologia ducha: Zrozumieć → Poczuć → Działać. Nie interesuje mnie duchowość oderwana od rzeczywistości. Interesuje mnie "Sztuka Życia" – konkretne narzędzia, systemy (Life OS) i nawyki, które pozwalają żyć w prawdzie.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. WRITINGS -->
+        <section id="writings">
+            <h1 data-key="writings-title">Teksty & Idee</h1>
+            <p data-key="writings-sub">Zbiór myśli, narzędzi mentalnych i perspektyw.</p>
+            
+            <div class="articles-grid" id="articles-container">
+                <!-- Articles injected via JS -->
+            </div>
+        </section>
+
+        <!-- 5. SERVICES -->
+        <section id="services">
+            <h1 data-key="services-title">Współpraca</h1>
+            
+            <div class="service-row">
+                <h2 data-key="srv-1-name">Mentoring 1:1</h2>
+                <div>
+                    <p data-key="srv-1-desc">Holistyczna praca nad Twoim życiem. Łączymy głęboką pracę ze świadomością z budowaniem konkretnych systemów (Sztuka Życia).</p>
+                    <button class="btn-outline" data-key="btn-contact">Umów rozmowę</button>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <h2 data-key="srv-2-name">Systemy & Konsultacje</h2>
+                <div>
+                    <p data-key="srv-2-desc">Projektowanie Life OS oraz Business OS. Wdrażanie procesów, automatyzacji i klarowności w Twojej firmie (MIND / GLG) lub życiu osobistym.</p>
+                    <button class="btn-outline" data-key="btn-contact">Zapytaj o ofertę</button>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <h2 data-key="srv-3-name">Warsztaty & Grupy</h2>
+                <div>
+                    <p data-key="srv-3-desc">Praca procesowa z zespołami, komunikacja NVC, technologia świadomości. Przestrzeń dla przyszłych retreatów.</p>
+                    <button class="btn-outline" data-key="btn-contact">Dołącz do listy</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CONTACT -->
+        <section id="contact">
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <h1 data-key="contact-title">Kontakt</h1>
+                <p data-key="contact-desc">Jesteś gotowy na zmianę? A może masz pytanie o systemy Life OS? Napisz.</p>
+                <a href="mailto:contact@danieldahan.com" class="btn" style="font-size: 1.2rem;">contact@danieldahan.com</a>
+                <br><br>
+                <p style="font-size: 0.9rem; opacity: 0.6;">Warszawa / Online</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            &copy; 2024 Daniel Dahan. All rights reserved. <br>
+            <span style="font-size: 0.8rem; opacity: 0.5;">Built with consciousness & code.</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- TRANSLATIONS DATABASE ---
+        const translations = {
+            pl: {
+                "nav-home": "Start", "nav-vision": "Wizja", "nav-about": "O mnie", "nav-writings": "Teksty", "nav-services": "Usługi", "nav-contact": "Kontakt",
+                "quote": "„Mędrzec to nie ktoś, kto wie kilka trudnych rzeczy, tylko ktoś, kto nie zapomniał tych najprostszych.”",
+                "hero-a-title": "Daniel Dahan.<br>Fizyka. Kod. Muzyka.<br>Świadomość.",
+                "hero-a-desc": "Pomagam ludziom widzieć jasno, odzyskiwać sprawczość i budować systemy życia (Life OS) oparte na pełni, nie na braku.",
+                "cta-help": "Jak mogę Ci pomóc", "cta-vision": "Zobacz wizję świata",
+                "timeline-title": "Moja Droga",
+                "tl-1-head": "Fundamenty", "tl-1-desc": "Pływanie wyczynowe, gitara klasyczna, fortepian. Dyscyplina i harmonia.",
+                "tl-2-head": "Nauka & Abstrakcja", "tl-2-desc": "Fizyka Teoretyczna (UW). Zrozumienie rzeczywistości od podstaw.",
+                "tl-3-head": "Technologia", "tl-3-desc": "Programista Python w MSD. Mentoring młodszych developerów.",
+                "tl-4-head": "Integracja", "tl-4-desc": "Holistyczny Mentor, Life OS, MIND/GLG. Łączenie światów.",
+                "vision-title": "Awakened World Already Is.",
+                "vision-subtitle": "Oświecony świat już tu jest. Jeśli o tym zapomniałeś, zawsze możesz tu wrócić.",
+                "cta-7days": "Rozpocznij 7 dni Obecności", "process-title": "Proces Powrotu",
+                "step-1": "Impuls", "step-1-d": "Moment zatrzymania. Iskra świadomości.",
+                "step-2": "Ramy Mentalne", "step-2-d": "Zrozumienie mechanizmów ego i umysłu.",
+                "step-3": "Infrastruktura", "step-3-d": "Budowa Life OS. Środowisko wspierające.",
+                "step-4": "Transformacja", "step-4-d": "Praktyka codzienna. Integracja cienia.",
+                "step-5": "Działanie", "step-5-d": "Nowa jakość pracy i relacji. Business OS.",
+                "step-6": "Grawitacja", "step-6-d": "Tworzenie wspólnoty. Przyciąganie innych.",
+                "about-title": "O mnie",
+                "about-bio-head": "Fizyk. Artysta. Programista. Mentor.",
+                "about-bio-1": "Urodziłem się w Warszawie, ale ukształtowały mnie również lata spędzone w Izraelu. Moje życie to ciągłe poszukiwanie syntezy.",
+                "about-bio-2": "Jako fizyk teoretyczny szukałem równań. Jako muzyk - harmonii. Jako programista - logiki. Dziś łączę te światy.",
+                "about-bio-3": "Moja misja to prakseologia ducha: Zrozumieć → Poczuć → Działać. Tworzę Life OS - system dla życia w prawdzie.",
+                "writings-title": "Teksty & Idee", "writings-sub": "Zbiór myśli, narzędzi mentalnych i perspektyw.",
+                "services-title": "Współpraca",
+                "srv-1-name": "Mentoring 1:1", "srv-1-desc": "Holistyczna praca nad Twoim życiem. Świadomość + Systemy.",
+                "srv-2-name": "Systemy & Konsultacje", "srv-2-desc": "Projektowanie Life OS oraz Business OS. Procesy, automatyzacje, MIND/GLG.",
+                "srv-3-name": "Warsztaty & Grupy", "srv-3-desc": "Praca procesowa, NVC, technologia świadomości.",
+                "btn-contact": "Skontaktuj się",
+                "contact-title": "Kontakt", "contact-desc": "Jesteś gotowy na zmianę? Napisz."
+            },
+            en: {
+                "nav-home": "Home", "nav-vision": "Vision", "nav-about": "About", "nav-writings": "Writings", "nav-services": "Services", "nav-contact": "Contact",
+                "quote": "\"A wise man is not someone who knows a few difficult things, but someone who hasn't forgotten the simplest ones.\"",
+                "hero-a-title": "Daniel Dahan.<br>Physics. Code. Music.<br>Consciousness.",
+                "hero-a-desc": "Helping people see clearly, regain agency, and build Life Systems (Life OS) based on wholeness, not lack.",
+                "cta-help": "How can I help", "cta-vision": "See the Vision",
+                "timeline-title": "My Path",
+                "tl-1-head": "Foundations", "tl-1-desc": "Competitive swimming, classical guitar, piano. Discipline and harmony.",
+                "tl-2-head": "Science & Abstraction", "tl-2-desc": "Theoretical Physics. Understanding reality from first principles.",
+                "tl-3-head": "Technology", "tl-3-desc": "Python Developer at MSD. Mentoring junior developers.",
+                "tl-4-head": "Integration", "tl-4-desc": "Holistic Mentor, Life OS, MIND/GLG. Bridging worlds.",
+                "vision-title": "Awakened World Already Is.",
+                "vision-subtitle": "It is already here. If you forget, you can always return here.",
+                "cta-7days": "Start 7 Days of Presence", "process-title": "The Return Process",
+                "step-1": "Impulse", "step-1-d": "The pause. The spark of awareness.",
+                "step-2": "Mental Frameworks", "step-2-d": "Understanding ego and mind mechanisms.",
+                "step-3": "Infrastructure", "step-3-d": "Building Life OS. Supportive environment.",
+                "step-4": "Transformation", "step-4-d": "Daily practice. Shadow integration.",
+                "step-5": "Action", "step-5-d": "New quality of work and relations. Business OS.",
+                "step-6": "Gravity", "step-6-d": "Building community. Attracting others.",
+                "about-title": "About Me",
+                "about-bio-head": "Physicist. Artist. Developer. Mentor.",
+                "about-bio-1": "Born in Warsaw, shaped by years in Israel. My life is a continuous search for synthesis.",
+                "about-bio-2": "As a physicist, I sought equations. As a musician - harmony. As a developer - logic. Today I combine these worlds.",
+                "about-bio-3": "My mission is spiritual praxeology: Understand → Feel → Act. I create Life OS - a system for living in truth.",
+                "writings-title": "Writings & Ideas", "writings-sub": "A collection of thoughts, mental tools, and perspectives.",
+                "services-title": "Services",
+                "srv-1-name": "Mentoring 1:1", "srv-1-desc": "Holistic work on your life. Consciousness + Systems.",
+                "srv-2-name": "Systems & Consulting", "srv-2-desc": "Designing Life OS and Business OS. Processes, automation, MIND/GLG.",
+                "srv-3-name": "Workshops & Groups", "srv-3-desc": "Process work, NVC, technology of consciousness.",
+                "btn-contact": "Contact Me",
+                "contact-title": "Contact", "contact-desc": "Ready for a change? Get in touch."
+            }
+        };
+
+        // --- ARTICLES DATA ---
+        const articles = [
+            {
+                id: 1,
+                tags: ["Consciousness", "Neuro"],
+                titlePL: "Uwaga jako kierownica rzeczywistości",
+                titleEN: "Attention as the Steering Wheel of Reality",
+                contentPL: "Twoja uwaga jest najcenniejszą walutą. To, na czym się skupiasz, rośnie. W fizyce kwantowej obserwator wpływa na wynik eksperymentu. W życiu jest tak samo. Jeśli nie zarządzasz swoją uwagą, zarządza nią algorytm.",
+                contentEN: "Your attention is your most valuable currency. What you focus on grows. In quantum physics, the observer affects the experiment. Life is the same. If you don't manage your attention, an algorithm will."
+            },
+            {
+                id: 2,
+                tags: ["Logotherapy", "Space"],
+                titlePL: "Przestrzeń między bodźcem a reakcją",
+                titleEN: "The Space Between Stimulus and Response",
+                contentPL: "Viktor Frankl mówił o ostatniej wolności człowieka: wyborze postawy. Między tym co się dzieje (bodziec), a tym co robisz (reakcja), jest ułamek sekundy. Tam mieszka Twoja wolność. Tam buduje się charakter.",
+                contentEN: "Viktor Frankl spoke of man's last freedom: the choice of attitude. Between what happens (stimulus) and what you do (response), there is a split second. That is where your freedom lives. That is where character is built."
+            },
+            {
+                id: 3,
+                tags: ["Systems", "Life OS"],
+                titlePL: "Budowanie własnego Life OS",
+                titleEN: "Building Your Own Life OS",
+                contentPL: "Duchowość bez systemu to tylko krótki haj. Potrzebujesz infrastruktury: nawyków, kalendarza, zasad podejmowania decyzji. Life OS to system operacyjny, który pozwala Twojej wizji przetrwać zderzenie z chaosem codzienności.",
+                contentEN: "Spirituality without a system is just a temporary high. You need infrastructure: habits, calendars, decision-making rules. Life OS is the operating system that allows your vision to survive the collision with daily chaos."
+            }
+        ];
+
+        // --- APP STATE ---
+        let currentLang = 'pl';
+        let currentRoute = 'landing-a';
+
+        // --- FUNCTIONS ---
+
+        function updateTexts() {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+            
+            // Update articles
+            const container = document.getElementById('articles-container');
+            container.innerHTML = '';
+            articles.forEach(art => {
+                const title = currentLang === 'pl' ? art.titlePL : art.titleEN;
+                const content = currentLang === 'pl' ? art.contentPL : art.contentEN;
+                
+                const card = document.createElement('div');
+                card.className = 'article-card';
+                card.innerHTML = `
+                    <div class="article-meta">${art.tags.join(' / ')}</div>
+                    <h3 class="article-title">${title}</h3>
+                    <p>${content}</p>
+                    <span style="font-size:0.85rem; text-decoration:underline;">${currentLang === 'pl' ? 'Czytaj więcej' : 'Read more'} &rarr;</span>
+                `;
+                container.appendChild(card);
+            });
+
+            // Update Nav Language Button
+            document.querySelector('.lang-switch').innerText = currentLang === 'pl' ? 'PL | EN' : 'EN | PL';
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pl' ? 'en' : 'pl';
+            document.documentElement.lang = currentLang;
+            updateTexts();
+        }
+
+        function router(route) {
+            // Default fallback
+            if (!route) route = 'landing-a';
+            
+            // Hide all sections
+            document.querySelectorAll('section').forEach(sec => {
+                sec.classList.remove('active');
+                sec.style.display = 'none';
+            });
+
+            // Show target section
+            const target = document.getElementById(route);
+            if (target) {
+                target.style.display = 'block';
+                // Small delay to allow display:block to render before adding opacity class
+                setTimeout(() => target.classList.add('active'), 10);
+            }
+
+            // Update Nav Active State
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('current'));
+            // Simple matching
+            const activeLink = document.querySelector(`.nav-links a[href="#${route}"]`);
+            if (activeLink) activeLink.classList.add('current');
+
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('open');
+
+            // Scroll to top
+            window.scrollTo(0,0);
+            
+            currentRoute = route;
+        }
+
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        // --- INIT ---
+        window.addEventListener('DOMContentLoaded', () => {
+            updateTexts();
+            router('landing-a'); // Initial Load
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+    </script>
+</body>
+</html>
